@@ -1,25 +1,37 @@
 
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Random;
 
 public abstract class Car {
 	
-	private Timestamp ticket;
+	private Calendar ticket;
+	private int timeLeft;
 	protected int parkingSpot;
 	
-	private Timestamp leaveTime;
-	
 	public Car() {
-//		int x = new Random().nextInt(5) + 1;
 		
 	}
 	
 	public void park(int parkingSpot) {
-		this.ticket = new Timestamp(System.currentTimeMillis());
+		this.ticket = Calendar.getInstance();
+		this.ticket.setTimeInMillis(new Timestamp(System.currentTimeMillis()).getTime());
+		
+		this.timeLeft = new Random().nextInt(5) + 1;
+		
 		this.parkingSpot = parkingSpot;
 	}
 	
-	public void exit() {
-		
+	public void tick() {
+		--timeLeft;
+	}
+	
+	public Calendar getTicket() {
+		return ticket;
+	}
+	
+	public int getTimeLeft() {
+		return timeLeft;
 	}
 	
 }

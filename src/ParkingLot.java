@@ -1,4 +1,5 @@
 import java.sql.Timestamp;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -6,7 +7,7 @@ public class ParkingLot {
 	
 	public static final int SIZE = 100;
 	
-	private Calendar cal;
+	private Calendar currentTime;
 	
 	public ArrayList<Car> lot;
 	
@@ -16,8 +17,8 @@ public class ParkingLot {
 	private final int TRUCK_COST = 30;
 	
 	public ParkingLot() {
-		this.cal = Calendar.getInstance();
-		cal.setTimeInMillis(new Timestamp(System.currentTimeMillis()).getTime());
+		this.currentTime = Calendar.getInstance();
+		this.currentTime.setTimeInMillis(new Timestamp(System.currentTimeMillis()).getTime());
 		
 		this.lot = new ArrayList<Car>();
 		
@@ -38,19 +39,35 @@ public class ParkingLot {
 	}
 	
 	public void tick() {
-		cal.add(Calendar.HOUR, 1);
+		currentTime.add(Calendar.HOUR, 1);
+		
+		for (int i = 0; i < lot.size(); i++) {
+			lot.get(i).tick();
+			
+			if (lot.get(i).getTimeLeft() <= 0) {
+				System.out.println("Car left at spot " + i);
+
+				exit(lot.get(i));
+				lot.remove(i--);
+			}
+		}
+	}
+	
+	public void exit(Car car) {
+		if (car instanceof Sedan)
+			money += SEDAN_COST;
+		else if (car instanceof SUV)
+			money += SUV_COST;
+		else if (car instanceof Truck)
+			money += TRUCK_COST;
 	}
 	
 	public boolean isFull() {
 		return lot.size() == SIZE;
 	}
 	
-//	public void exit() {
-//		if (car instanceof Sedan)
-//			money += SEDAN_COST;
-//		else if (car instanceof SUV)
-//			money += SUV_COST;
-//		else if (car instanceof Truck)
-//			money += TRUCK_COST;
-//	}
+	public int getMoney() {
+		return money;
+	}
+	
 }

@@ -7,7 +7,7 @@ public class Main {
 		ParkingLot lot = new ParkingLot();
 		
 		for (int i = 0; i < 1000; i++) {
-			int carType = new Random().nextInt(3) + 1;
+			int carType = new Random().nextInt(8) + 1;
 			
 			if (carType == 1)
 				lot.park(new Sedan());
@@ -18,6 +18,8 @@ public class Main {
 			
 			lot.tick();
 		}
+		
+		System.out.println("Made $" + lot.getMoney());
 	}
 	
 }
