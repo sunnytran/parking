@@ -17,7 +17,7 @@ public abstract class Car {
 		this.ticket = Calendar.getInstance();
 		this.ticket.setTimeInMillis(new Timestamp(System.currentTimeMillis()).getTime());
 		
-		this.timeLeft = new Random().nextInt(5) + 1;
+		this.timeLeft = new Random().nextInt(12) + 1;
 		
 		this.parkingSpot = parkingSpot;
 	}
