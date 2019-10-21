@@ -1,6 +1,5 @@
 
 import java.sql.Timestamp;
-import java.util.Random;
 
 public abstract class Car {
 	

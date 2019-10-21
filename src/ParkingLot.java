@@ -1,10 +1,14 @@
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ParkingLot {
 	
 	public static final int SIZE = 100;
 	
-	public Car lot[];
-	private int index;
+	private Calendar cal;
+	
+	public ArrayList<Car> lot;
 	
 	private int money;
 	private final int SEDAN_COST = 10;
@@ -12,24 +16,33 @@ public class ParkingLot {
 	private final int TRUCK_COST = 30;
 	
 	public ParkingLot() {
-		this.lot = new Car[SIZE];
-		this.index = 0;
+		this.cal = Calendar.getInstance();
+		cal.setTimeInMillis(new Timestamp(System.currentTimeMillis()).getTime());
+		
+		this.lot = new ArrayList<Car>();
 		
 		this.money = 0;
 	}
 	
 	public void park(Car car) {
 		if (isFull()) {
-			System.out.println("Parking lot is full");
+//			System.out.println("Parking lot is full");
 			return;
 		}
 		
-		car.park(index);
-		lot[index++] = car;
+		int spot = lot.size();
+		System.out.println("Car parked at spot " + spot);
+		
+		car.park(spot);
+		lot.add(car);
+	}
+	
+	public void tick() {
+		cal.add(Calendar.HOUR, 1);
 	}
 	
 	public boolean isFull() {
-		return index == SIZE;
+		return lot.size() == SIZE;
 	}
 	
 //	public void exit() {

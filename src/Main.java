@@ -11,10 +11,12 @@ public class Main {
 			
 			if (carType == 1)
 				lot.park(new Sedan());
-			else if (carType == 2)
+			else if (carType == 2) 
 				lot.park(new SUV());
 			else
 				lot.park(new Truck());
+			
+			lot.tick();
 		}
 	}
 	
