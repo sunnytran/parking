@@ -25,7 +25,7 @@ public class Main {
 					groupA.park(add);
 				else if (add instanceof Sedan)
 					groupB.park(add);
-				else if (add instanceof SUV && groupA.getSuvCost()() < groupB.getSuvCost())
+				else if (add instanceof SUV && groupA.getSuvCost() < groupB.getSuvCost())
 					groupA.park(add);
 				else if (add instanceof SUV)
 					groupB.park(add);
