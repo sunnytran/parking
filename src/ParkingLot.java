@@ -12,11 +12,19 @@ public class ParkingLot {
 	public ArrayList<Car> lot;
 	
 	private int money;
-	private final int SEDAN_COST = 10;
-	private final int SUV_COST = 20;
-	private final int TRUCK_COST = 30;
+	private int sedanCost;
+	private int suvCost;
+	private int truckCost;
 	
 	public ParkingLot() {
+		this(10, 20, 30);
+	}
+	
+	public ParkingLot(int sedanCost, int suvCost, int truckCost) {
+		this.sedanCost = sedanCost;
+		this.suvCost = suvCost;
+		this.truckCost = truckCost;
+		
 		this.currentTime = Calendar.getInstance();
 		this.currentTime.setTimeInMillis(new Timestamp(System.currentTimeMillis()).getTime());
 		
@@ -55,11 +63,11 @@ public class ParkingLot {
 	
 	public void exit(Car car) {
 		if (car instanceof Sedan)
-			money += SEDAN_COST;
+			money += sedanCost;
 		else if (car instanceof SUV)
-			money += SUV_COST;
+			money += suvCost;
 		else if (car instanceof Truck)
-			money += TRUCK_COST;
+			money += truckCost;
 	}
 	
 	public boolean isFull() {
@@ -68,6 +76,18 @@ public class ParkingLot {
 	
 	public int getMoney() {
 		return money;
+	}
+
+	public int getSedanCost() {
+		return sedanCost;
+	}
+
+	public int getSuvCost() {
+		return suvCost;
+	}
+
+	public int getTruckCost() {
+		return truckCost;
 	}
 	
 }
